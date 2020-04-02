@@ -28,12 +28,12 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('Buy peacock feathers')
         # Terminate by pressing Enter
         inputbox.send_keys(Keys.ENTER)
-
+        self.browser.implicitly_wait(25)
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            "New To-Do item did not appear in the table"
+            any(row.text == 'Buy peacock feathers' for row in rows),
+            "New To-Do item did not appear in the table -- its text was:\n%s" % (table.text,)
         )
         self.fail('Finish the tests')
 
